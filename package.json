@@ -1,7 +1,6 @@
 {
   "name": "@lampn9397/react-textbook-matching",
   "version": "1.0.0",
-  "private": true,
   "main": "./index.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
@@ -14,6 +13,9 @@
     "react-draggable": "^4.4.3",
     "react-scripts": "3.4.3",
     "styled-components": "^5.2.0"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "start": "react-scripts start",
