@@ -8,7 +8,7 @@ type DroppableZoneType = {
   height: number;
 }
 
-type DragFuncData = {
+export type DragFuncData = {
   isInDroppableZone: boolean;
 }
 
@@ -16,13 +16,13 @@ interface DragFunc {
   (data: DragFuncData): false | void;
 }
 
-type draggableItemData = {
+export interface DraggableItemData extends DragFuncData {
   imageUrl: string;
 }
 
 interface DraggableItemProps {
   onDragStop: DragFunc,
-  item: draggableItemData,
+  item: DraggableItemData,
   droppableZone: DroppableZoneType,
 }
 
