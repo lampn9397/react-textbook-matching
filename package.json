@@ -1,6 +1,6 @@
 {
   "name": "@lampn9397/react-textbook-matching",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./index.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
