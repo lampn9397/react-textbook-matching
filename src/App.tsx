@@ -1,14 +1,14 @@
 import React from 'react';
 
 // Components
-import DraggableItem from './components/DraggableItem';
+import DraggableItem, { DraggableItemData, DragFuncData } from './components/DraggableItem';
 
 // Variables
 import styles from './app.module.scss';
 import waterMelon from './assets/water-melon.png';
 import DroppableZone from './components/DroppableZone';
 
-const countFunc = (total, item) => {
+const countFunc = (total: number, item: DraggableItemData) => {
   if (item.isInDroppableZone) {
     return total + 1;
   }
@@ -16,10 +16,10 @@ const countFunc = (total, item) => {
   return total;
 };
 
-const imageList = Array(10).fill().map((_, index) => ({ id: index, imageUrl: waterMelon }));
+const imageList = Array(10).fill({}).map((_, index) => ({ id: index, imageUrl: waterMelon, isInDroppableZone: false }));
 
 function TextBookMatching() {
-  const droppableZoneRef = React.useRef()
+  const droppableZoneRef = React.useRef<HTMLDivElement>(null)
 
   const [state, setState] = React.useState({
     droppableZone: {
@@ -34,7 +34,11 @@ function TextBookMatching() {
   const badgeNumber = React.useMemo(() => state.imageList.reduce(countFunc, 0), [state.imageList])
 
   React.useEffect(() => {
-    const clientRect = droppableZoneRef.current.getBoundingClientRect()
+    const ref = droppableZoneRef.current;
+
+    if (ref === null) return;
+
+    const clientRect = ref.getBoundingClientRect()
 
     setState((prevState) => ({
       ...prevState,
@@ -44,13 +48,13 @@ function TextBookMatching() {
         width: clientRect.width,
         height: clientRect.height,
       }
-    }))
+    }));
   }, []);
 
-  const onDragStop = React.useCallback((item, index) => (data) => {
+  const onDragStop = React.useCallback((item, index) => (data: DragFuncData) => {
     const imageList = JSON.parse(JSON.stringify(state.imageList));
     imageList[index].isInDroppableZone = data.isInDroppableZone;
-    
+
     setState((prevState) => ({
       ...prevState,
       imageList,
