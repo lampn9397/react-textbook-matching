@@ -1,26 +1,79 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+// Components
+import DraggableItem from './components/DraggableItem';
+
+// Variables
+import styles from './app.module.scss';
+import waterMelon from './assets/water-melon.png';
+import DroppableZone from './components/DroppableZone';
+
+const countFunc = (total, item) => {
+  if (item.isInDroppableZone) {
+    return total + 1;
+  }
+
+  return total;
+};
+
+const imageList = Array(10).fill().map((_, index) => ({ id: index, imageUrl: waterMelon }));
+
+function TextBookMatching() {
+  const droppableZoneRef = React.useRef()
+
+  const [state, setState] = React.useState({
+    droppableZone: {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+    },
+    imageList,
+  });
+
+  const badgeNumber = React.useMemo(() => state.imageList.reduce(countFunc, 0), [state.imageList])
+
+  React.useEffect(() => {
+    const clientRect = droppableZoneRef.current.getBoundingClientRect()
+
+    setState((prevState) => ({
+      ...prevState,
+      droppableZone: {
+        x: clientRect.x,
+        y: clientRect.y,
+        width: clientRect.width,
+        height: clientRect.height,
+      }
+    }))
+  }, []);
+
+  const onDragStop = React.useCallback((item, index) => (data) => {
+    const imageList = JSON.parse(JSON.stringify(state.imageList));
+    imageList[index].isInDroppableZone = data.isInDroppableZone;
+    
+    setState((prevState) => ({
+      ...prevState,
+      imageList,
+    }));
+  }, [state.imageList]);
+
+  const renderItem = React.useCallback((item, index) => {
+    return (
+      <DraggableItem
+        key={index}
+        item={item}
+        droppableZone={state.droppableZone}
+        onDragStop={onDragStop(item, index)}
+      />
+    );
+  }, [state.droppableZone, onDragStop]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={styles.container}>
+      <DroppableZone ref={droppableZoneRef} badgeNumber={badgeNumber} />
+      {state.imageList.map(renderItem)}
     </div>
   );
 }
 
-export default App;
+export default TextBookMatching;
