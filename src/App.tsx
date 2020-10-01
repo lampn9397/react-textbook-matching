@@ -1,8 +1,6 @@
 import React from 'react';
 
 // Components
-// import DroppableZone from './components/DroppableZone';
-// import DraggableItem, { DraggableItemData, DragFuncData } from './components/DraggableItem';
 import { DraggableItem, DroppableZone, DragFuncData, DraggableItemData } from '..';
 
 // Variables
