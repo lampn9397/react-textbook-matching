@@ -1,12 +1,13 @@
 import React from 'react';
 
 // Components
-import DraggableItem, { DraggableItemData, DragFuncData } from './components/DraggableItem';
+// import DroppableZone from './components/DroppableZone';
+// import DraggableItem, { DraggableItemData, DragFuncData } from './components/DraggableItem';
+import { DraggableItem, DroppableZone, DragFuncData, DraggableItemData } from '..';
 
 // Variables
 import styles from './app.module.scss';
 import waterMelon from './assets/water-melon.png';
-import DroppableZone from './components/DroppableZone';
 
 const countFunc = (total: number, item: DraggableItemData) => {
   if (item.isInDroppableZone) {
