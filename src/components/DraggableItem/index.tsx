@@ -32,11 +32,23 @@ const DraggableItem = ({ item, droppableZone, onDragStop }: DraggableItemProps) 
   const onStop: DraggableEventHandler = React.useCallback((e: DraggableEvent) => {
     if (typeof onDragStop === 'function') {
       const event = e as MouseEvent; // Fix TypeScript error
-      const minX = droppableZone.x;
-      const minY = droppableZone.y;
-      const maxX = droppableZone.x + droppableZone.width;
-      const maxY = droppableZone.y + droppableZone.height;
-      const isInDroppableZone = (event.clientX >= minX && event.clientX <= maxX) && (event.clientY >= minY && event.clientY <= maxY);
+      const target = event.target as HTMLElement;
+      const zoneLeftX = droppableZone.x;
+      const zoneTopY = droppableZone.y;
+      const zoneRightX = droppableZone.x + droppableZone.width;
+      const zoneBottomY = droppableZone.y + droppableZone.height;
+
+      const itemWidth = target.clientWidth;
+      const itemHeight = target.clientHeight;
+
+      const itemX = event.x - event.offsetX + (itemWidth / 2);
+      const itemY = event.y - event.offsetY + (itemHeight / 2);
+      // const itemRightX = itemLeftX + (itemWidth / 2);
+      // const itemBottomY = itemTopY + (itemHeight / 2);
+      const isInDroppableZone = (
+        (itemX >= zoneLeftX && itemX <= zoneRightX) &&
+        (itemY >= zoneTopY && itemY <= zoneBottomY)
+      );
       onDragStop({ isInDroppableZone });
     }
   }, [droppableZone, onDragStop]);

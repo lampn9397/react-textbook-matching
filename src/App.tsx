@@ -15,7 +15,11 @@ const countFunc = (total: number, item: DraggableItemData) => {
   return total;
 };
 
-const imageList = Array(10).fill({}).map((_, index) => ({ id: index, imageUrl: waterMelon, isInDroppableZone: false }));
+const imageList = Array(10).fill({}).map((_, index) => ({
+  id: index,
+  imageUrl: waterMelon,
+  isInDroppableZone: false,
+}));
 
 function TextBookMatching() {
   const droppableZoneRef = React.useRef<HTMLDivElement>(null)
