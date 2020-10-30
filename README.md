@@ -1,21 +1,21 @@
-# @lampn9397/react-textbook-matching
-[![NPM version](https://img.shields.io/npm/v/@wiicamp/react-native-reminders)](https://www.npmjs.com/package/@lampn9397/react-textbook-matching)
-[![License](https://img.shields.io/npm/l/@wiicamp/react-native-reminders)](https://github.com/lampn9397/react-textbook-matching/blob/master/LICENSE)
+# @lampn9397/react-textbook-questions
+[![NPM version](https://img.shields.io/npm/v/@lampn9397/react-textbook-questions)](https://www.npmjs.com/package/@lampn9397/react-textbook-questions)
+[![License](https://img.shields.io/npm/l/@lampn9397/react-textbook-questions)](https://github.com/lampn9397/react-textbook-questions/blob/master/LICENSE)
 
 ## Installation
 
 ```sh
-yarn add @lampn9397/react-textbook-matching
+yarn add @lampn9397/react-textbook-questions
 ```
 Or
 ```sh
-npm install @lampn9397/react-textbook-matching
+npm install @lampn9397/react-textbook-questions
 ```
 
 ## Usage
 
 ```js
-import { DraggableItem, DroppableZone } from "@lampn9397/react-textbook-matching";
+import { DraggableItem, DroppableZone } from "@lampn9397/react-textbook-questions";
 
 <DraggableItem
   // Item data
