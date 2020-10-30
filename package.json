@@ -1,7 +1,7 @@
 {
-  "name": "@lampn9397/react-textbook-matching",
+  "name": "@lampn9397/react-textbook-questions",
   "version": "1.0.3",
-  "main": "./index.ts",
+  "main": "./src/main.ts",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

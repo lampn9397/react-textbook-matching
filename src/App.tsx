@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import { DraggableItem, DroppableZone, DragFuncData, DraggableItemData } from '..';
+import { DraggableItem, DroppableZone, DragFuncData, DraggableItemData } from './main';
 
 // Variables
 import styles from './app.module.scss';
