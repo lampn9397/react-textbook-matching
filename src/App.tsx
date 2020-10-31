@@ -54,8 +54,23 @@ function TextBookMatching() {
     }));
   }, []);
 
-  const onDragStop = React.useCallback((item, index) => (data: DragFuncData) => {
+  const onDrag = React.useCallback((item, index) => (data: DragFuncData) => {
+    if (state.imageList[index].isInDroppableZone === data.isInDroppableZone) return;
+
     const imageList = JSON.parse(JSON.stringify(state.imageList));
+    imageList[index].isInDroppableZone = data.isInDroppableZone;
+
+    setState((prevState) => ({
+      ...prevState,
+      imageList,
+    }));
+  }, [state.imageList]);
+
+  const onDragStop = React.useCallback((item, index) => (data: DragFuncData) => {
+    if (state.imageList[index].isInDroppableZone === data.isInDroppableZone) return;
+
+    const imageList = JSON.parse(JSON.stringify(state.imageList));
+
     imageList[index].isInDroppableZone = data.isInDroppableZone;
 
     setState((prevState) => ({
@@ -69,11 +84,12 @@ function TextBookMatching() {
       <DraggableItem
         key={index}
         item={item}
-        droppableZone={state.droppableZone}
+        onDrag={onDrag(item, index)}
         onDragStop={onDragStop(item, index)}
+        droppableZone={state.droppableZone}
       />
     );
-  }, [state.droppableZone, onDragStop]);
+  }, [state.droppableZone, onDrag, onDragStop]);
 
   return (
     <div className={styles.container}>
